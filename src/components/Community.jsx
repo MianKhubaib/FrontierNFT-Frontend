@@ -1,9 +1,9 @@
-import Chatboxlist from "./Chat/Chatboxlist";
+import Chatboxlist from "./Chat/ChatBox/Chatboxlist";
 import "tachyons";
 import { useState, useEffect } from "react";
-import Scroll from "./Chat/Scroll";
-import MessageInput from "./Chat/MessageInput";
-import Userboxlist from "./Chat/Userboxlist";
+import Scroll from "./Chat/Scroll/Scroll";
+import MessageInput from "./MessageInput";
+import Userboxlist from "./Chat/UsersBox/Userboxlist";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Pusher from "pusher-js";
@@ -24,7 +24,6 @@ function Community() {
       .get(`${apiUrl}/messages/sync`)
       .then((response) => {
         setMessages(response.data);
-        console.log(messages);
       })
       .catch((err) => {
         if (
@@ -47,14 +46,12 @@ function Community() {
     axios
       .get(`${apiUrl}/users/all`)
       .then((response) => {
-        console.log(response);
         const updatedData = response.data.filter(
           (user) => user.firstName !== userName
         );
         setUsers(updatedData);
       })
       .catch((error) => {
-        console.log(error);
       });
   }, []);
 
@@ -94,39 +91,40 @@ function Community() {
       receivedBy: ChatWith,
     };
     axios.post(`${apiUrl}/messages/new`, message).then((response) => {
-      console.log("newMessage: " + JSON.stringify(response));
     });
     setMessages([...messages, message]);
   };
 
   const currentChatHandler = (currentChat) => {
     setChatWith(currentChat);
-    console.log("currentChat: in APP ", ChatWith);
   };
 
   return (
     <>
       <div className="App">
-        <h3>
-          Current User {userName} having Chat with {ChatWith}
-        </h3>
-        <>
-          <Userboxlist
-            users={users}
-            onCurrentChatHandler={currentChatHandler}
-            userName={userName}
-          />
-          <Scroll>
-            <Chatboxlist
-              userName={userName}
-              messages={messages}
-              users={users}
-              currentChat={ChatWith}
-            />
-          </Scroll>
-        </>
+        {users.length === 0 ? <h1>No user available, you are only User <br /><br /> Ask your friend to SignUp ,then have Chat</h1> :
+          <>
+            <h3>
+              Current User {userName} having Chat with {ChatWith}
+            </h3>
+            <>
+              <Userboxlist
+                users={users}
+                onCurrentChatHandler={currentChatHandler}
+                userName={userName}
+              />
+              <Scroll>
+                <Chatboxlist
+                  userName={userName}
+                  messages={messages}
+                  users={users}
+                  currentChat={ChatWith}
+                />
+              </Scroll>
+            </>
 
-        <MessageInput newmessageChangeHandler={messageChangeHandler} />
+            <MessageInput newmessageChangeHandler={messageChangeHandler} />  </>
+        }
       </div>
       <div>
         <ToastContainer

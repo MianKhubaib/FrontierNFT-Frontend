@@ -18,13 +18,6 @@ const Chatbox = ({
     (receivedBy === currentChat && sentBy === user)
   ) {
     currentChatCheck = true;
-    console.log(
-      "currentChat in conditions: ",
-      currentChat,
-      sentBy,
-      receivedBy,
-      currentChatCheck
-    );
   }
   return (
     <>

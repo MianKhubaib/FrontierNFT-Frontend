@@ -77,7 +77,6 @@ const AssetCard = ({
     });
 
   const handleUpdateSubmit = (event) => {
-    console.log("hi", id);
 
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -90,13 +89,11 @@ const AssetCard = ({
     description != "" ? formData.append("description", description) : count++;
     images != undefined ? formData.append("image", images) : count++;
 
-    console.log("count", count, title, description, formData);
     if (count !== 3) {
       setLoading(true);
       axios
         .patch(`${apiUrl}/assets/update/${id}`, formData)
         .then((res) => {
-          console.log(res);
           notify("Asset updated successfully");
           setLoading(false);
           setDialogUpdate(false);

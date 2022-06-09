@@ -1,9 +1,9 @@
 import * as React from "react";
-import { getAssets, getAssetById } from "../services/api";
+import { getAssets, getAssetById } from "../../services/api";
 import { useState, useEffect } from "react";
 import AssetCard from "./AssetCard";
 import { useNavigate } from "react-router-dom";
-import CustomizedSnackbars from "./Notification";
+import CustomizedSnackbars from "../Notification";
 import ClipLoader from "react-spinners/ClipLoader";
 
 export default function Main() {
@@ -65,7 +65,7 @@ export default function Main() {
           );
         })}
       {assets.length === 0 && !loading && (
-        <h1 className="f1 lh ma pa2 tc">Assets not found</h1>
+        <h1 className="f1 lh ma pa2 tc">Assets not found <br /> You can create a new asset , Click on Mint</h1>
       )}
     </div>
   );

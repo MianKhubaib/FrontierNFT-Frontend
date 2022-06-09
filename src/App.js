@@ -1,12 +1,12 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
-import SignUp from "./components/SignUp";
+import SignUp from "./components/Auth/SignUp";
 import { Route, Routes } from "react-router-dom";
 import "tachyons";
 import Navbar from "./components/Navbar";
-import Main from "./components/Main";
+import Main from "./components/Listing/Main";
 import NewNft from "./components/NewNft";
-import SignIn from "./components/SignIn";
+import SignIn from "./components/Auth/SignIn";
 import Community from "./components/Community";
 function App() {
   const [toggleNavbar, setToggleNavbar] = useState(true);

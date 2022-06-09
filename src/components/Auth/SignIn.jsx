@@ -13,7 +13,7 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { sendLoginRequest } from "../services/api";
+import { sendLoginRequest } from "../../services/api";
 import ClipLoader from "react-spinners/ClipLoader";
 function Copyright(props) {
   return (
@@ -45,10 +45,8 @@ export default function SignIn(props) {
     event.preventDefault();
     setLoading(true);
     setErr("");
-    console.log("event", event.currentTarget);
     const data = new FormData(event.currentTarget);
 
-    console.log("data", data);
 
     sendLoginRequest(data.get("email"), data.get("password"))
       .then((res) => {

@@ -43,7 +43,6 @@ export function sendSignupRequest(emailParam, passwordParam) {
 }
 
 export function getAssets() {
-  console.log("axios", axios.defaults.headers);
   return axios
     .get(`${apiUrl}/assets`)
     .then((res) => res.data)
@@ -78,7 +77,6 @@ export function createAsset(id, title, description, image) {
 }
 
 export function updateAsset(id, form) {
-  console.log(form);
   return axios
     .patch(`${apiUrl}/assets/update/${id}`, form)
     .then((res) => res)
@@ -89,12 +87,10 @@ export function getAssetById(id) {
   return axios
     .get(`${apiUrl}/assets/${id}`) // use id url
     .then((res) => {
-      console.log(res.data);
       return res.data;
     })
     .catch((err) => {
       // catch error
-      console.log(id);
       console.error(err);
     });
 }
@@ -103,7 +99,5 @@ export function deleteAssetbyId(assetId) {
   return axios
     .delete(`${apiUrl}/assets/${assetId}`)
     .then((res) => res.status)
-    .catch((err) => {
-      console.log(err);
-    });
+    .catch((err) => {});
 }

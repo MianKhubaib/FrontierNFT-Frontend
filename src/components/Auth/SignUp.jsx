@@ -81,7 +81,6 @@ export default function SignUp() {
         })
         .then((res) => {
           setloading(false);
-          console.log(res);
           notify("Account Created successfully", res.status);
           setTimeout(() => {
             navigate("/SignIn", { replace: true });

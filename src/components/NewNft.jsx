@@ -54,7 +54,6 @@ function NewNft() {
         .post(`${apiUrl}/assets`, formData)
         .then((res) => {
           setloading(false);
-          console.log(res)
           notify("Asset Created successfully", res.status);
           data.set("title", "")
           data.set("description", "")
