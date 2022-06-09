@@ -17,7 +17,7 @@ function App() {
         <>
           {toggleNavbar && <Navbar />}
           <Routes>
-            <Route path="/" element={<Main />} />
+            <Route path="/*" element={<Main />} />
             <Route path="/Listing" element={<Main />} />
             <Route path="/Mint" element={<NewNft />} />
             <Route path="/Community" element={<Community />} />
