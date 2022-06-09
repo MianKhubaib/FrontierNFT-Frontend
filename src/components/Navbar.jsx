@@ -8,7 +8,6 @@ import Menu from "@mui/material/Menu";
 import Link from "@mui/material/Link";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
@@ -21,13 +20,11 @@ import Select from '@mui/material/Select';
 
 // import {Link } from "react-router-dom"
 const pages = ["Mint", "Listing", "Community"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 
 const ResponsiveAppBar = () => {
 
   const [anchorElNav, setAnchorElNav] = useState("");
-  const [anchorElUser, setAnchorElUser] = useState(null);
   const [address, setAddress] = useState("Connect MetaMask")
   const [fullAddress, setFullAddress] = useState("")
   const [showButton, setShowButton] = useState(true)
@@ -89,16 +86,9 @@ const ResponsiveAppBar = () => {
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
   };
 
   const handleDisconnect = () => {

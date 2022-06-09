@@ -1,7 +1,5 @@
 import axios from "axios";
 import jwt_decode from "jwt-decode";
-import { Navigate } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 // import { apiUrl } from './constants';
 const apiUrl = "https://frontier-backend1.herokuapp.com";
 axios.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem(

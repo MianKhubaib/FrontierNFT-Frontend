@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Typography from "@mui/material/Typography";
 import "tachyons";
 import "react-toastify/dist/ReactToastify.css";
@@ -45,9 +45,9 @@ function NewNft() {
     const description = data.get("description");
     const formData = new FormData();
     let count = 0;
-    title != "" ? formData.append("title", title) : count++;
-    description != "" ? formData.append("description", description) : count++;
-    images != undefined ? formData.append("image", images) : count++;
+    title !== "" ? formData.append("title", title) : count++;
+    description !== "" ? formData.append("description", description) : count++;
+    images !== undefined ? formData.append("image", images) : count++;
     if (count === 0) {
       setloading(true);
       axios

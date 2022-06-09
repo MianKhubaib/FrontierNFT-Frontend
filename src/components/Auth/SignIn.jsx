@@ -47,7 +47,6 @@ export default function SignIn(props) {
     setErr("");
     const data = new FormData(event.currentTarget);
 
-
     sendLoginRequest(data.get("email"), data.get("password"))
       .then((res) => {
         // props.setLoginFuntion(true);
@@ -97,7 +96,7 @@ export default function SignIn(props) {
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
-            {err != "" ? <span style={{ color: "red" }}> {err}</span> : <></>}
+            {err !== "" ? <span style={{ color: "red" }}> {err}</span> : <></>}
             <Box
               component="form"
               noValidate

@@ -14,7 +14,7 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import ClipLoader from "react-spinners/ClipLoader";
 import axios from "axios";
 const apiUrl = "https://frontier-backend1.herokuapp.com";
@@ -66,10 +66,10 @@ export default function SignUp() {
     const lastName = data.get("lastName");
     const formData = new FormData();
     let count = 0;
-    email != "" ? formData.append("email", email) : count++;
-    password != "" ? formData.append("password", password) : count++;
-    firstName != "" ? formData.append("firstName", firstName) : count++;
-    lastName != "" ? formData.append("lastName", lastName) : count++;
+    email !== "" ? formData.append("email", email) : count++;
+    password !== "" ? formData.append("password", password) : count++;
+    firstName !== "" ? formData.append("firstName", firstName) : count++;
+    lastName !== "" ? formData.append("lastName", lastName) : count++;
     if (count === 0) {
       setloading(true);
       axios

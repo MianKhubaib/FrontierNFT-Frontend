@@ -58,7 +58,6 @@ const AssetCard = ({
   const [openDialogUpdate, setDialogUpdate] = React.useState(false);
   const [images, setImages] = React.useState();
   const [loading, setLoading] = React.useState(false);
-  const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const handleClickOpenUpdate = () => setDialogUpdate(true);
   const handleCloseDialogUpdate = () => setDialogUpdate(false);
@@ -85,9 +84,9 @@ const AssetCard = ({
     const formData = new FormData();
 
     let count = 0;
-    title != "" ? formData.append("title", title) : count++;
-    description != "" ? formData.append("description", description) : count++;
-    images != undefined ? formData.append("image", images) : count++;
+    title !== "" ? formData.append("title", title) : count++;
+    description !== "" ? formData.append("description", description) : count++;
+    images !== undefined ? formData.append("image", images) : count++;
 
     if (count !== 3) {
       setLoading(true);

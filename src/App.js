@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import SignUp from "./components/Auth/SignUp";
 import { Route, Routes } from "react-router-dom";
 import "tachyons";
@@ -29,7 +29,7 @@ function App() {
         </>
       ) : (
         <Routes>
-          <Route path="/FrontierNFT-Frontend" element={<SignIn />} />
+          <Route path="/" element={<SignIn />} />
           <Route path="/SignIn" element={<SignIn />} />
           <Route path="/SignUp" element={<SignUp />} />
         </Routes>

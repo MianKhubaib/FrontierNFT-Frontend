@@ -17,7 +17,6 @@ function Community() {
   const [users, setUsers] = useState([]);
   const [ChatWith, setChatWith] = useState("");
   const [userName, setUserName] = useState(localStorage.getItem("firstName"));
-  const [loading, setLoading] = useState(false);
   let navigate = useNavigate();
   useEffect(() => {
     axios
@@ -53,7 +52,7 @@ function Community() {
       })
       .catch((error) => {
       });
-  }, []);
+  }, [navigate, userName]);
 
   useEffect(() => {
     Pusher.logToConsole = true;

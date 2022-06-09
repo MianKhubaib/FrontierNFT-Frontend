@@ -29,7 +29,7 @@ export default function Main() {
         setLoading(false);
       }
     });
-  }, [result]);
+  }, [result, navigate]);
   const onDelete = (id) => {
     const newData = assets.filter((asset) => asset.id !== id);
     setAssets(newData);
