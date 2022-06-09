@@ -1,5 +1,5 @@
 import * as React from "react";
-import { getAssets, getAssetById } from "../../services/api";
+import { getAssets } from "../../services/api";
 import { useState, useEffect } from "react";
 import AssetCard from "./AssetCard";
 import { useNavigate } from "react-router-dom";
