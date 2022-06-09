@@ -63,7 +63,7 @@ const AssetCard = ({
   const handleCloseDialogUpdate = () => setDialogUpdate(false);
   const handleClickOpen = () => setDialog(true);
   const handleCloseDialog = () => setDialog(false);
-  useEffect(() => {}, []);
+  useEffect(() => { }, []);
   const notify = (message) =>
     toast(message, {
       position: "top-right",
@@ -135,7 +135,7 @@ const AssetCard = ({
               <Box sx={style}>
                 <CardMedia
                   component="img"
-                  height="300"
+                  height="400"
                   image={imagePath}
                   alt="green iguana"
                 />
@@ -162,7 +162,7 @@ const AssetCard = ({
           <CardActionArea onClick={() => setOpen(true)}>
             <CardMedia
               component="img"
-              height="120"
+              height="130"
               image={imagePath}
               alt="green iguana"
             />
