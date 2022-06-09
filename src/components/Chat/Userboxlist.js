@@ -8,9 +8,10 @@ const Userboxlist = ({ users, userName, onCurrentChatHandler }) => {
         return (
           <UserBox
             key={i}
-            contactName={user.name}
+            contactName={user.firstName}
             userName={userName}
             onCurrentChatHandler={onCurrentChatHandler}
+            path="https://random.imagecdn.app/75/75"
           />
         );
       })}

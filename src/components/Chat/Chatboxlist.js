@@ -1,7 +1,7 @@
 import React from "react";
 import Chatbox from "./Chatbox";
 
-const Chatboxlist = ({ userName, users, messages, currentChat }) => {
+const Chatboxlist = ({ userName, messages, currentChat }) => {
   return (
     <div className="justify-between">
       {messages.map((singleMessage, i) => {
@@ -9,10 +9,11 @@ const Chatboxlist = ({ userName, users, messages, currentChat }) => {
           <Chatbox
             key={i}
             message={singleMessage.message}
-            sentBy={singleMessage.names[0]}
-            receivedBy={singleMessage.names[1]}
+            sentBy={singleMessage.sentBy}
+            receivedBy={singleMessage.receivedBy}
             user={userName}
             currentChat={currentChat}
+            createdAt={singleMessage.createdAt}
           />
         );
       })}

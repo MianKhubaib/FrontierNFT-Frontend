@@ -4,72 +4,99 @@ import { useState, useEffect } from "react";
 import Scroll from "./Chat/Scroll";
 import MessageInput from "./Chat/MessageInput";
 import Userboxlist from "./Chat/Userboxlist";
-
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import Pusher from "pusher-js";
+import { ToastContainer, toast } from "react-toastify";
+const apiUrl = "https://frontier-backend1.herokuapp.com";
+axios.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem(
+  "access_token"
+)}`;
 function Community() {
-  const [messages, setMessages] = useState([
-    {
-      message: "newMessage",
-      names: ["Mian", "Anyone"],
-      timestamp: new Date().getTime,
-      receivedBy: "ChatWith",
-    },
-  ]);
-  const [users, setUsers] = useState([
-    {
-      id: "1",
-      firstName: "Mian",
-    },
-  ]);
+  const [messages, setMessages] = useState([]);
+  const [users, setUsers] = useState([]);
   const [ChatWith, setChatWith] = useState("");
   const [userName, setUserName] = useState(localStorage.getItem("firstName"));
-  const [auth, setAuth] = useState(false);
+  const [loading, setLoading] = useState(false);
+  let navigate = useNavigate();
   useEffect(() => {
-    // axios
-    //   .get("/messages/sync")
-    //   .then((response) => {
-    //     setMessages(response.data);
-    //     console.log(messages);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-    // axios
-    //   .get("/users")
-    //   .then((response) => {
-    //     console.log(response);
-    //     setUsers(response.data);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    axios
+      .get(`${apiUrl}/messages/sync`)
+      .then((response) => {
+        setMessages(response.data);
+        console.log(messages);
+      })
+      .catch((err) => {
+        if (
+          err.response.data.statusCode === 401 &&
+          err.response.data.message === "Unauthorized"
+        ) {
+          notify(err.response.data.message + " Session Expired");
+          localStorage.removeItem("access_token");
+          localStorage.removeItem("firstName");
+          localStorage.removeItem("address");
+          localStorage.removeItem("fullAddress");
+          setTimeout(() => {
+            navigate("/SignIn", { replace: true });
+          }, 4000);
+        }
+        notify(
+          err.response.data.message + " Code-" + err.response.data.statusCode
+        );
+      });
+    axios
+      .get(`${apiUrl}/users/all`)
+      .then((response) => {
+        console.log(response);
+        const updatedData = response.data.filter(
+          (user) => user.firstName !== userName
+        );
+        setUsers(updatedData);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
+
   useEffect(() => {
-    // Pusher.logToConsole = true;
-    // const pusher = new Pusher("c822673020b36ea6d3f5", {
-    //   cluster: "ap2",
-    // });
-    // const channel = pusher.subscribe("messages");
-    // channel.bind("inserted", function (data) {
-    //   // alert(JSON.stringify(data));
-    //   setMessages([...messages, data]);
-    // });
-    // return () => {
-    //   channel.unbind_all();
-    //   channel.unsubscribe();
-    // };
+    Pusher.logToConsole = true;
+
+    var pusher = new Pusher("76e5a0d02d7fd527d3a5", {
+      cluster: "ap2",
+    });
+
+    var channel = pusher.subscribe("message");
+    channel.bind("inserted", function (data) {
+      // alert(JSON.stringify(data));
+      setMessages([...messages, data]);
+    });
+    return () => {
+      channel.unbind_all();
+      channel.unsubscribe();
+    };
   }, [messages]);
+
+  const notify = (message) =>
+    toast(message, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
 
   const messageChangeHandler = (newMessage) => {
     const message = {
       message: newMessage,
-      names: [userName, ChatWith],
-      timestamp: new Date().getTime,
+      sentBy: userName,
       receivedBy: ChatWith,
     };
-    // axios.post("/messages/new", message).then((response) => {
-    //   console.log("newMessage: " + JSON.stringify(response));
-    // });
+    axios.post(`${apiUrl}/messages/new`, message).then((response) => {
+      console.log("newMessage: " + JSON.stringify(response));
+    });
+    setMessages([...messages, message]);
   };
 
   const currentChatHandler = (currentChat) => {
@@ -83,7 +110,6 @@ function Community() {
         <h3>
           Current User {userName} having Chat with {ChatWith}
         </h3>
-        
         <>
           <Userboxlist
             users={users}
@@ -99,8 +125,21 @@ function Community() {
             />
           </Scroll>
         </>
-        (
-        <MessageInput newmessageChangeHandler={messageChangeHandler} />)
+
+        <MessageInput newmessageChangeHandler={messageChangeHandler} />
+      </div>
+      <div>
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
       </div>
     </>
   );

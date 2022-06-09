@@ -6,10 +6,10 @@ const Scroll = (props) => {
       style={{
         overflowY: "auto",
         border: "2px solid green",
-        height: "500px",
+        height: "400px",
         width: "770px",
-        overscrollBehavior: "auto",
-        overflowInline: "center",
+        overscrollBehaviorY: "contain",
+        overflowInline: "contain",
       }}
       className="center justify-between"
     >
