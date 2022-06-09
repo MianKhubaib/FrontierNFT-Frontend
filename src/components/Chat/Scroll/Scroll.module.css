@@ -2,6 +2,6 @@ scroll {
   display: flex;
   flex-direction: column-reverse;
   height: 250px;
-  overflow-y: scroll;
+  overflow-x: scroll;
   border: 1px solid black;
 }

@@ -60,7 +60,8 @@ export default function Main() {
               onDelete={onDelete}
               type={asset.type}
               price={asset.price}
-              result={setResult}
+              resultFun={setResult}
+              result={result}
             />
           );
         })}

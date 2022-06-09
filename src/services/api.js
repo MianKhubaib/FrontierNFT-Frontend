@@ -25,6 +25,8 @@ export async function sendLoginRequest(emailParam, passwordParam) {
   });
   localStorage.setItem("access_token", res.data.access_token);
   localStorage.setItem("firstName", res.data.firstName);
+  localStorage.setItem("id", res.data.id);
+
   return res.data.access_token;
 }
 

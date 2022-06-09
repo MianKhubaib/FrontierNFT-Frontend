@@ -153,7 +153,9 @@ const ResponsiveAppBar = () => {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                  <Link href={`/${page}`} sx={{ my: 2, color: "black" }}>
+                    {page}
+                  </Link>
                 </MenuItem>
               ))}
             </Menu>
@@ -175,7 +177,7 @@ const ResponsiveAppBar = () => {
               textDecoration: "none",
             }}
           >
-            Frontier AIF
+            Frontier-AIF
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
@@ -237,7 +239,7 @@ const ResponsiveAppBar = () => {
           pauseOnHover
         />
       </div>
-    </AppBar>
+    </AppBar >
   );
 };
 export default ResponsiveAppBar;

@@ -1,5 +1,5 @@
 import React from "react";
-
+import './Scroll.module.css'
 const Scroll = (props) => {
   return (
     <div
@@ -8,8 +8,8 @@ const Scroll = (props) => {
         border: "2px solid green",
         height: "400px",
         width: "770px",
-        overscrollBehaviorY: "contain",
-        overflowInline: "contain",
+        overscrollBehaviorY: "clip",
+        overflowInline: "clip",
       }}
       className="center justify-between"
     >

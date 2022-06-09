@@ -22,7 +22,7 @@ function Community() {
     axios
       .get(`${apiUrl}/messages/sync`)
       .then((response) => {
-        setMessages(response.data);
+        setMessages(response.data.reverse());
       })
       .catch((err) => {
         if (
@@ -52,25 +52,28 @@ function Community() {
       })
       .catch((error) => {
       });
-  }, [navigate, userName]);
+  }, []);
 
   useEffect(() => {
     Pusher.logToConsole = true;
-
     var pusher = new Pusher("76e5a0d02d7fd527d3a5", {
       cluster: "ap2",
     });
 
     var channel = pusher.subscribe("message");
-    channel.bind("inserted", function (data) {
+    channel.bind("inserted", () => {
+      axios
+        .get(`${apiUrl}/messages/sync`)
+        .then((response) => {
+          setMessages(response.data.reverse());
+        })
       // alert(JSON.stringify(data));
-      setMessages([...messages, data]);
     });
     return () => {
       channel.unbind_all();
       channel.unsubscribe();
     };
-  }, [messages]);
+  }, []);
 
   const notify = (message) =>
     toast(message, {

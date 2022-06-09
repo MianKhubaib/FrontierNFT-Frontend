@@ -52,6 +52,7 @@ const AssetCard = ({
   type,
   price,
   result,
+  resultFun
 }) => {
   const [open, setOpen] = useState(false);
   const [openDialog, setDialog] = React.useState(false);
@@ -96,7 +97,7 @@ const AssetCard = ({
           notify("Asset updated successfully");
           setLoading(false);
           setDialogUpdate(false);
-          result(true);
+          resultFun(!result);
         })
         .catch((err) => {
           notify(err.response.data.message);
