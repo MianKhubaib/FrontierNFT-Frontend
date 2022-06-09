@@ -1,7 +1,7 @@
 {
+  "homepage": "https://miankhubaib.github.io/FrontierNFT-Frontend",
   "name": "frontier",
   "version": "0.1.0",
-  "homepage": "https://miankhubaib.github.io/",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.9.0",
