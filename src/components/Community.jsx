@@ -49,6 +49,7 @@ function Community() {
           (user) => user.firstName !== userName
         );
         setUsers(updatedData);
+        notify("Click on Name Button to start chat with anyone");
       })
       .catch((error) => {
       });
@@ -107,7 +108,7 @@ function Community() {
         {users.length === 0 ? <h1>No user available, you are only User <br /><br /> Ask your friend to SignUp ,then have Chat</h1> :
           <>
             <h3>
-              Current User {userName} having Chat with {ChatWith}
+              {userName} having Chat with {ChatWith}
             </h3>
             <>
               <Userboxlist
