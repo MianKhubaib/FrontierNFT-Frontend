@@ -8,6 +8,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Pusher from "pusher-js";
 import { ToastContainer, toast } from "react-toastify";
+import { Typography } from "@mui/material";
 const apiUrl = "https://frontier-backend1.herokuapp.com";
 axios.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem(
   "access_token"
@@ -107,15 +108,16 @@ function Community() {
       <div className="App">
         {users.length === 0 ? <h1>No user available, you are only User <br /><br /> Ask your friend to SignUp ,then have Chat</h1> :
           <>
-            <h3>
-              {userName} having Chat with {ChatWith}
-            </h3>
-            <>
-              <Userboxlist
-                users={users}
-                onCurrentChatHandler={currentChatHandler}
-                userName={userName}
-              />
+            <Userboxlist
+              users={users}
+              onCurrentChatHandler={currentChatHandler}
+              userName={userName}
+            />
+            {ChatWith !== "" ? <>
+              <Typography variant="h6">
+                {userName} having Chat with {ChatWith}
+              </Typography>
+              <span>Scroll down for old messages/Scroll Up for new messages</span>
               <Scroll>
                 <Chatboxlist
                   userName={userName}
@@ -124,9 +126,11 @@ function Community() {
                   currentChat={ChatWith}
                 />
               </Scroll>
-            </>
 
-            <MessageInput newmessageChangeHandler={messageChangeHandler} />  </>
+              <MessageInput newmessageChangeHandler={messageChangeHandler} />  </> :
+              <Typography variant="h5">Click on Name Button to Start Chat</Typography>
+            }
+          </>
         }
       </div>
       <div>
